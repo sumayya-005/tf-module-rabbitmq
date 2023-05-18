@@ -3,5 +3,5 @@ resource "aws_route53_record" "private" {
  name    = "${var.name}-${var.env}"
  type    = "A"
  ttl     = 300
- records = [var.alb ["private"].lb_dns_name]
+ records = [aws_instance.rabbitmq.private_ip]
 }
