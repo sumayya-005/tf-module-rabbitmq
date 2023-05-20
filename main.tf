@@ -15,7 +15,11 @@ resource "aws_instance" "rabbitmq" {
     }
 
     inline = {
-      ""
-    }
+      "yum install python39-devel -y" ,
+      "pip3.9 install ansible botocore boto3" ,
+
+     " ansible-pull -i localhost, -U https://github.com/sumayya-005/roboshop-ansible roboshop.yml -e ROLE_NAME=${COMPONENT} -e ENV=${var.env}"
+
+  }
   }
 }
