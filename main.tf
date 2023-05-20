@@ -9,7 +9,9 @@ resource "aws_instance" "rabbitmq" {
 
   provisioner "remote-exec" {
     connection {
-      host
+      host = self.private_ip
+      user = local.SSH_USER
+      pass = local.SSH_PASS
     }
   }
 }
