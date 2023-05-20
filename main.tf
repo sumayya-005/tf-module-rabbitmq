@@ -13,5 +13,9 @@ resource "aws_instance" "rabbitmq" {
       user = local.SSH_USER
       pass = local.SSH_PASS
     }
+
+    inline = {
+      ""
+    }
   }
 }
