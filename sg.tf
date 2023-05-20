@@ -1,16 +1,24 @@
 resource "aws_security_group" "sg" {
-  name        = "${var.env}-${var.name}-docdb.sg"
-  description = "${var.env}-${var.name}-docdb.sg"
+  name        = "${var.env}-${var.name}-ec2.sg"
+  description = "${var.env}-${var.name}-ec2.sg"
   vpc_id      = var.vpc_id
 
 
     ingress {
-      description      = "MONGODB"
-      from_port        = 27071
-      to_port          = 27071
+      description      = "SSH"
+      from_port        = 22
+      to_port          = 22
       protocol         = "tcp"
-      cidr_blocks      = [var.vpc_cidr,var.BASTION_NODE]
+      cidr_blocks      = [var.BASTION_NODE]
     }
+
+  ingress {
+    description      = "RABBITMQ"
+    from_port        = 5672
+    to_port          = 5672
+    protocol         = "tcp"
+    cidr_blocks      = [var.vpc_cidr]
+  }
 
   egress  {
     from_port        = 0
@@ -21,6 +29,6 @@ resource "aws_security_group" "sg" {
   }
 
   tags = {
-    Name = "${var.env}-${var.name}-docdb.sg"
+    Name = "${var.env}-${var.name}-ec2.sg"
   }
 }
