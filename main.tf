@@ -11,13 +11,12 @@ resource "aws_instance" "rabbitmq" {
     connection {
       host = self.private_ip
       user = local.SSH_USER
-      pass = local.SSH_PASS
+      password = local.SSH_PASS
     }
 
     inline = {
       "yum install python39-devel -y" ,
       "pip3.9 install ansible botocore boto3" ,
-
      " ansible-pull -i localhost, -U https://github.com/sumayya-005/roboshop-ansible roboshop.yml -e ROLE_NAME=${COMPONENT} -e ENV=${var.env}"
 
   }
