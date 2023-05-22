@@ -32,7 +32,7 @@ resource "null_resource" "ansible-apply" {
         password = local.SSH_PASS
       }
 
-      inline = {
+      inline={
         "sudo yum install python39-devel -y" ,
         " sudo pip3.9 install ansible botocore boto3" ,
        " ansible-pull -i localhost, -U https://github.com/sumayya-005/roboshop-ansible roboshop.yml -e ROLE_NAME=${COMPONENT} -e ENV=${var.env}"
